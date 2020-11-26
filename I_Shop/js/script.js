@@ -33,7 +33,31 @@ for(let i = 0; i < menuParents.length; i++){
         menuParent.classList.remove('_active');
     });
 }
-
 //</SUBMENU>
+//<SEARCH_SELECT>
+const searchTitle = document.querySelector('.search-page__title');
+const searchCategories = document.querySelector('.search-page__categories');
+searchTitle.addEventListener('click', function(event){
+    searchTitle.classList.toggle('_active');
+    _slideToggle(searchCategories);
+})
+//</SEARCH_SELECT>
+//<CHECKBOX_SEARCH>
+const checkboxCategories = document.querySelectorAll('.categories-search__checkbox');
+for (let i = 0; i < checkboxCategories.length; i++) {
+    const checkboxCategory = checkboxCategories[i];
+    checkboxCategory.addEventListener('change', function(event){
+        checkboxCategory.classList.toggle('_active');
+        const checkboxActiveCategories = document.querySelectorAll('.categories-search__checkbox._active');
+        if (checkboxActiveCategories.length > 0){
+            searchTitle.classList.add('_categories');
+            const searchQuantity = document.querySelector('.search-page__quantity');
+            searchQuantity.innerHTML = searchQuantity.getAttribute('data-text') + " " + checkboxActiveCategories.length;
+        } else {
+            searchTitle.classList.remove('_categories');
+        }
+    })
+}
+//</CHECKBOX_SEARCH>
 
 
